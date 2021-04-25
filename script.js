@@ -37,14 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
           value: 1,
         },
         {
-          text: "option1",
+          text: "option2",
           value: 1,
         },
       ],
     });
-  
-  
-    dropDown.init(dropDown.options.renderTo, dropDown.options.items)
 })
 
 
