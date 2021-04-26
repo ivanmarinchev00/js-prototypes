@@ -7,10 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
   myCustomDropDownMenu.prototype = {
     init: function (options) {
       console.log(options.items + "OPTIONS ITEMS");
-      this.render(options.renderTo, options.items)
+      this.render(options.renderTo, options.items, options.listeners)
       
     },
-    render: function (div, items) {
+    render: function (div, items, listener) {
       
       var currentDiv = document.getElementById(`${div}`);
       console.log(items + "ITEMS HERE")
@@ -21,10 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
               <option value="${element.value}">${element.text}</option>
               `;
       });
+      _select.addEventListener('change', (e) => {
+        listener.selectionChange(e.target.value);
+      })
       // _select.append(items);
       currentDiv.appendChild(_select);
       document.body.appendChild(currentDiv);
-    },
+    }
   };
   
   
@@ -34,13 +37,19 @@ document.addEventListener("DOMContentLoaded", () => {
       items: [
         {
           text: "option1",
-          value: 1,
+          value: "option1",
         },
         {
           text: "option2",
-          value: 1,
+          value: "option2",
         },
       ],
+      listeners: {
+      	selectionChange: (selectedValue) => {
+          console.log(selectedValue);
+      		alert(`selected value is ${selectedValue}`);
+      	}
+      }
     });
 })
 
