@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     this.options = options;
     this.init(options);
   };
+
+  
   
   myCustomDropDownMenu.prototype = {
     init: function (options) {
@@ -15,21 +17,36 @@ document.addEventListener("DOMContentLoaded", () => {
       var currentDiv = document.getElementById(`${div}`);
       console.log(items + "ITEMS HERE")
       console.log(currentDiv + "SHOULD BE DIV")
-      var _select = document.createElement("select");
+      var _customSelectDiv = document.createElement("div");
+      _customSelectDiv.setAttribute('class', 'custom-select');
+      var _triggerDiv = document.createElement('div');
+      _triggerDiv.setAttribute('class', 'custom-select__trigger');
+      _triggerDiv.innerHTML = '<span>Choose wisely</span>';
+      _customSelectDiv.appendChild(_triggerDiv);
+      var _arrowDiv = document.createElement('div');
+      _arrowDiv.setAttribute('class', 'arrow');
+      _triggerDiv.appendChild(_arrowDiv);
+      var _customOptions = document.createElement('div');
+      _customOptions.setAttribute('class', 'custom-options');
+      _customSelectDiv.appendChild(_customOptions);
       items.forEach((element) => {
-        _select.innerHTML += `
-              <option value="${element.value}">${element.text}</option>
+        _customOptions.innerHTML += `
+              <span class="custom-option" value="${element.value}">${element.text}</span>
               `;
       });
-      _select.addEventListener('change', (e) => {
+      _customSelectDiv.addEventListener('change', (e) => {
         listener.selectionChange(e.target.value);
       })
-      // _select.append(items);
-      currentDiv.appendChild(_select);
+      // _customSelectDiv.append(items);
+      currentDiv.appendChild(_customSelectDiv);
       document.body.appendChild(currentDiv);
+
+      document.getElementById(`${div}`).addEventListener('click', function() {
+        console.log("This was clicked");
+        this.querySelector('.custom-select').classList.toggle('open');
+    })
     }
   };
-  
   
     const dropDown = new myCustomDropDownMenu({
       renderTo: "myDropDownContainer",
@@ -51,6 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
       	}
       }
     });
+
+
+  
 })
 
 
