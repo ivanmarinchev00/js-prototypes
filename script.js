@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       _customSelectDiv.setAttribute('class', 'custom-select');
       var _triggerDiv = document.createElement('div');
       _triggerDiv.setAttribute('class', 'custom-select__trigger');
-      _triggerDiv.innerHTML = '<span>Choose wisely</span>';
+      _triggerDiv.innerHTML = '<span>option 0</span>';
       _customSelectDiv.appendChild(_triggerDiv);
       var _arrowDiv = document.createElement('div');
       _arrowDiv.setAttribute('class', 'arrow');
@@ -34,9 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
               <span class="custom-option" value="${element.value}">${element.text}</span>
               `;
       });
-      _customSelectDiv.addEventListener('change', (e) => {
-        listener.selectionChange(e.target.value);
-      })
+      // _customOptions.addEventListener('click', (e) => {
+      //   listener.selectionChange(e.target.value);
+      // })
       // _customSelectDiv.append(items);
       currentDiv.appendChild(_customSelectDiv);
       document.body.appendChild(currentDiv);
@@ -45,6 +45,15 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("This was clicked");
         this.querySelector('.custom-select').classList.toggle('open');
     })
+
+    for (const option of document.querySelectorAll(".custom-option")) {
+      option.addEventListener('click', function() {
+          if (!this.classList.contains('selected')) {
+              this.classList.add('selected');
+              this.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = this.textContent;
+          }
+      })
+  }
     }
   };
   
@@ -52,6 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
       renderTo: "myDropDownContainer",
       emptyText: "Select some option",
       items: [
+        {
+          text: "option0",
+          value: "option0",
+        },
         {
           text: "option1",
           value: "option1",
@@ -61,12 +74,12 @@ document.addEventListener("DOMContentLoaded", () => {
           value: "option2",
         },
       ],
-      listeners: {
-      	selectionChange: (selectedValue) => {
-          console.log(selectedValue);
-      		alert(`selected value is ${selectedValue}`);
-      	}
-      }
+      // listeners: {
+      // 	selectionChange: (selectedValue) => {
+      //     console.log(selectedValue);
+      // 		alert(`selected value is ${selectedValue}`);
+      // 	}
+      // }
     });
 
 
