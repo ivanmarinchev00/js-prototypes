@@ -107,6 +107,7 @@ transform: translate(-50%, -50%);
 }
 
 .icons{
+    margin-top: 10%;
     display: flex;
     width: 30px;
     height: 30px;
