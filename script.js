@@ -12,13 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
       var currentDiv = document.getElementById(`${div}`);
       var optionsHtml = ``;
       items.forEach((element) => {
-        if (element.text === `option0`)
-          optionsHtml += `<span class="custom-option selected" value="${element.value}">${element.text}</span>`;
-        else {
-          optionsHtml += `
-          <span class="custom-option" value="${element.value}">${element.text}</span>
+          optionsHtml += `<div class="option-row">
+          <img class="icons" src="${element.icon}"/><span class="custom-option" value="${element.value}">${element.text}</span>
+          </div>
           `;
-        }
       });
       currentDiv.innerHTML += `<div class="custom-select">
       <div class="custom-select__trigger"><span>Option0</span>
@@ -37,19 +34,19 @@ document.addEventListener("DOMContentLoaded", () => {
         this.querySelector(".custom-select").classList.toggle("open");
       });
 
-      for (const option of document.querySelectorAll(".custom-option")) {
-        option.addEventListener("click", function () {
-          if (!this.classList.contains("selected")) {
-            this.classList.add("selected");
-            this.parentNode
-              .querySelector(".custom-option.selected")
-              .classList.remove("selected");
-            this.closest(".custom-select").querySelector(
-              ".custom-select__trigger span"
-            ).textContent = this.textContent;
-          }
-        });
-      }
+      // for (const option of document.querySelectorAll(".custom-option")) {
+      //   option.addEventListener("click", function () {
+      //     if (!this.classList.contains("selected")) {
+      //       this.classList.add("selected");
+      //       this.parentNode
+      //         .querySelector(".custom-option.selected")
+      //         .classList.remove("selected");
+      //       this.closest(".custom-select").querySelector(
+      //         ".custom-select__trigger span"
+      //       ).textContent = this.textContent;
+      //     }
+      //   });
+      // }
     },
   };
 
@@ -60,14 +57,17 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         text: "option0",
         value: "option0",
+        icon: "images/disagree.png"
       },
       {
         text: "option1",
         value: "option1",
+        icon: "images/network.png"
       },
       {
         text: "option2",
         value: "option2",
+        icon: "images/translate.png"
       },
     ],
     listeners: {

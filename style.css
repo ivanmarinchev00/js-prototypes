@@ -1,6 +1,6 @@
 #myDropDownContainer{
 position: absolute;
-top: 10%;
+top: 30%;
 left: 50%;
 transform: translate(-50%, -50%);
 }
@@ -55,7 +55,7 @@ transform: translate(-50%, -50%);
 }
 .custom-option {
     position: relative;
-    display: block;
+    display: flex;
     padding: 0 22px 0 22px;
     font-size: 22px;
     font-weight: 300;
@@ -104,4 +104,14 @@ transform: translate(-50%, -50%);
 .open .arrow::after {
     left: 5px;
     transform: rotate(45deg);
+}
+
+.icons{
+    display: flex;
+    width: 30px;
+    height: 30px;
+}
+
+.option-row{
+    display: flex;
 }
