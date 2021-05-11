@@ -11,23 +11,20 @@ document.addEventListener("DOMContentLoaded", () => {
     render: function (div, items, listener) {
       var currentDiv = document.getElementById(`${div}`);
       var optionsHtml = ``;
+
       items.forEach((element) => {
           optionsHtml += `<div class="option-row">
           <img class="icons" src="${element.icon}"/><span class="custom-option" value="${element.value}">${element.text}</span>
           </div>
           `;
       });
+
       currentDiv.innerHTML += `<div class="custom-select">
       <div class="custom-select__trigger"><span>Option0</span>
           <div class="arrow"></div>
       </div>
       <div class="custom-options"> ${optionsHtml} </div>`;
-      var options = currentDiv.querySelectorAll(".custom-option");
-      options.forEach((option) => {
-        option.addEventListener("click", (e) => {
-          listener.selectionChange(e.target);
-        });
-      });
+
       document.body.appendChild(currentDiv);
 
       document.getElementById(`${div}`).addEventListener("click", function () {
@@ -35,7 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       for (const option of document.querySelectorAll(".custom-option")) {
-        option.addEventListener("click", function () {
+        option.addEventListener("click", function (e) {
+          listener.selectionChange(e.target);
           if (!this.classList.contains("selected")) {
             this.classList.add("selected");
             this.parentNode
@@ -49,12 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     },
   };
-
-
-
-
-
-  
 
   const dropDown = new myCustomDropDownMenu({
     renderTo: "myDropDownContainer",
