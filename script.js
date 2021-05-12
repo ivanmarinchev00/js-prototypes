@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       items.forEach((element) => {
           optionsHtml += `<div class="option-row">
-          <img class="icons" src="${element.icon}"/><span class="custom-option" value="${element.value}">${element.text}</span>
+          <i class="${element.icon_font}"><i/><span class="custom-option" value="${element.value}">${element.text}</span>
           </div>
           `;
       });
@@ -27,14 +27,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       document.body.appendChild(currentDiv);
 
-      document.getElementById(`${div}`).addEventListener("click", function () {
+      document.getElementById(div).addEventListener("click", function () {
         this.querySelector(".custom-select").classList.toggle("open");
       });
 
       for (const option of document.querySelectorAll(".custom-option")) {
         option.addEventListener("click", function (e) {
+
           listener.selectionChange(e.target);
+
           if (!this.classList.contains("selected")) {
+
             this.classList.add("selected");
             this.parentNode
               .querySelector(".custom-option.selected")
@@ -55,17 +58,20 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         text: "option0",
         value: "option0",
-        icon: "images/disagree.png"
+        icon: "images/disagree.png",
+        icon_font: "icon-translate-1"
       },
       {
         text: "option1",
         value: "option1",
-        icon: "images/network.png"
+        icon: "images/network.png",
+        icon_font: "icon-network"
       },
       {
         text: "option2",
         value: "option2",
-        icon: "images/translate.png"
+        icon: "images/translate.png",
+        icon_font: "icon-translate-1"
       },
     ],
     listeners: {
