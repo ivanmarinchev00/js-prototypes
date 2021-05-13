@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
       items.forEach((element) => {
           optionsHtml += `<div class="option-row">
           <div class="left">
-          <span class="${element.icon_font}">
+          <a class="${element.icon_font}"></a>
           </div>
           <div class="right">
           <span/><span class="custom-option" value="${element.value}">${element.text}</span>

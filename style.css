@@ -119,9 +119,25 @@ transform: translate(-50%, -50%);
 
 .left{
     margin: 7%;
-    flex: 0.5;
+    flex: 0.5;    
 }
 
 .right{
     flex: 0.5;
+}
+
+.icon-network{
+    display: block;
+    background: url("spritesheet.png") no-repeat;
+    background-position: -45px -5px;
+    height: 30px;
+    width: 30px;
+}
+
+.icon-translate-1{
+    display: block;
+    background: url("spritesheet.png") no-repeat;
+    background-position: -5px -45px;
+    height: 30px;
+    width: 30px;
 }

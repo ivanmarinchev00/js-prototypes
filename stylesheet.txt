@@ -1,0 +1,23 @@
+.sprite {
+    background-image: url(spritesheet.png);
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.sprite-disagree-_1_ {
+    width: 30px;
+    height: 30px;
+    background-position: -5px -5px;
+}
+
+.sprite-network-_1_ {
+    width: 30px;
+    height: 30px;
+    background-position: -45px -5px;
+}
+
+.sprite-translate-_1_ {
+    width: 30px;
+    height: 30px;
+    background-position: -5px -45px;
+}
