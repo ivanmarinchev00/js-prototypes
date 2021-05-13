@@ -116,3 +116,12 @@ transform: translate(-50%, -50%);
 .option-row{
     display: flex;
 }
+
+.left{
+    margin: 7%;
+    flex: 0.5;
+}
+
+.right{
+    flex: 0.5;
+}

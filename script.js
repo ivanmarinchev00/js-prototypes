@@ -14,7 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       items.forEach((element) => {
           optionsHtml += `<div class="option-row">
-          <i class="${element.icon_font}"><i/><span class="custom-option" value="${element.value}">${element.text}</span>
+          <div class="left">
+          <span class="${element.icon_font}">
+          </div>
+          <div class="right">
+          <span/><span class="custom-option" value="${element.value}">${element.text}</span>
+          </div>
           </div>
           `;
       });
@@ -56,19 +61,19 @@ document.addEventListener("DOMContentLoaded", () => {
     emptyText: "Select some option",
     items: [
       {
-        text: "option0",
+        text: "Option0",
         value: "option0",
         icon: "images/disagree.png",
         icon_font: "icon-translate-1"
       },
       {
-        text: "option1",
+        text: "Option1",
         value: "option1",
         icon: "images/network.png",
         icon_font: "icon-network"
       },
       {
-        text: "option2",
+        text: "Option2",
         value: "option2",
         icon: "images/translate.png",
         icon_font: "icon-translate-1"
