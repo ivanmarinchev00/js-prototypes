@@ -6,9 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   myCustomDropDownMenu.prototype = {
     init: function (options) {
-      this.render(options.renderTo, options.items, options.listeners);
+      this.render(options.renderTo, options.items, options.listeners, options.click);
     },
-    render: function (div, items, listener) {
+    render: function (div, items, listener, click) {
       var currentDiv = document.getElementById(`${div}`);
       var optionsHtml = ``;
 
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <a class="${element.icon_font}"></a>
           </div>
           <div class="right">
-          <span/><span class="custom-option" value="${element.value}">${element.text}</span>
+          <span/><span class="custom-option" id="option" value="${element.value}"">${element.text}</span>
           </div>
           </div>
           `;
@@ -32,17 +32,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       document.body.appendChild(currentDiv);
 
+      var clickOptions = document.querySelectorAll(".option-row")
+      for(var i = 0; i < clickOptions.length; i++){
+        clickOptions[i].addEventListener("click", items[i].click);
+      }
+
       document.getElementById(div).addEventListener("click", function () {
         this.querySelector(".custom-select").classList.toggle("open");
       });
 
       for (const option of document.querySelectorAll(".custom-option")) {
         option.addEventListener("click", function (e) {
-
           listener.selectionChange(e.target);
-
           if (!this.classList.contains("selected")) {
-
             this.classList.add("selected");
             this.parentNode
               .querySelector(".custom-option.selected")
@@ -54,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     },
+    
   };
 
   const dropDown = new myCustomDropDownMenu({
@@ -64,19 +67,28 @@ document.addEventListener("DOMContentLoaded", () => {
         text: "Option0",
         value: "option0",
         icon: "images/disagree.png",
-        icon_font: "icon-translate-1"
+        icon_font: "icon-translate-1",
+        click: () => {
+          console.log('option 0 click handler');
+        }
       },
       {
         text: "Option1",
         value: "option1",
         icon: "images/network.png",
-        icon_font: "icon-network"
+        icon_font: "icon-network",
+        click: () => {
+          console.log('option 1 click handler');
+        }
       },
       {
         text: "Option2",
         value: "option2",
         icon: "images/translate.png",
-        icon_font: "icon-translate-1"
+        icon_font: "icon-translate-1",
+        click: () => {
+          console.log('option 2 click handler');
+        }
       },
     ],
     listeners: {
