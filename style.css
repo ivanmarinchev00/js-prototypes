@@ -141,3 +141,17 @@ transform: translate(-50%, -50%);
     height: 30px;
     width: 30px;
 }
+
+.buttons{
+    position: absolute;
+    top: 50%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    height: 80px;
+    width: 100px;
+}
+
+button{
+    margin: 15%;
+}
