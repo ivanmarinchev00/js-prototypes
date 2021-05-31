@@ -8,6 +8,15 @@ document.addEventListener("DOMContentLoaded", () => {
     init: function (options) {
       this.render(options.renderTo, options.items, options.listeners, options.click);
     },
+    clearSelection: function (){
+      var changed = document.querySelector(".custom-select__trigger span")
+      changed.innerHTML = "Choose"
+    },
+    chooseOption: function(option){
+      document.querySelector(".custom-select").querySelector(
+        ".custom-select__trigger span"
+      ).innerHTML = option.text;
+    },
     render: function (div, items, listener) {
       var currentDiv = document.getElementById(`${div}`);
       var buttonsDiv = document.getElementById('buttons')
@@ -30,6 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       document.body.appendChild(buttonsDiv);
 
+     
+
       currentDiv.innerHTML += `<div class="custom-select">
       <div class="custom-select__trigger"><span>Option0</span>
           <div class="arrow"></div>
@@ -46,20 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
         clickOptions[i].addEventListener("click", items[i].click);
       }
 
-      var clearButton = document.getElementById("clear")
-      clearButton.addEventListener("click", function() {
-        currentDiv.querySelector(".custom-select").querySelector(
-          ".custom-select__trigger span"
-        ).textContent = "Cleared";
-      });
 
-      var selectButton = document.getElementById("select")
-      selectButton.addEventListener("click", function(){
-        listener.selectionChange("Option0");
-        currentDiv.querySelector(".custom-select").querySelector(
-          ".custom-select__trigger span"
-        ).textContent = "Option0";
-      })
+
 
       document.getElementById(div).addEventListener("click", function () {
         this.querySelector(".custom-select").classList.toggle("open");
@@ -82,6 +81,8 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     
   };
+
+
 
   const dropDown = new myCustomDropDownMenu({
     renderTo: "myDropDownContainer",
@@ -117,21 +118,23 @@ document.addEventListener("DOMContentLoaded", () => {
     ],
     listeners: {
       selectionChange: (selectedValue) => {
-        if(selectedValue.innerHTML != undefined) alert(`selected value is ${selectedValue.innerHTML}`);
-        if(selectedValue.innerHTML === undefined) alert(`selected value is ${selectedValue}`)
-      },
-    },
-    methods: {
-        clearSelection: (div) => {
-          div.querySelector(".custom-select").querySelector(
-            ".custom-select__trigger span"
-          ).textContent = "Choose Again";
-        },
-        option1Selected: () => {
-          selectionChange("Option1")
-        }
+          alert(`selected value is ${selectedValue.innerHTML}`);
+      }
     },
   });
+
+  var clearButton = document.getElementById("clear")
+clearButton.addEventListener("click", function() {
+  dropDown.clearSelection()
+})
+
+var selectButton = document.getElementById("select")
+selectButton.addEventListener("click", function(){
+  dropDown.chooseOption(dropDown.options.items[0])
+})
+
 });
+
+
 
 
