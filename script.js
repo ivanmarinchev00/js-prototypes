@@ -6,24 +6,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
   myCustomDropDownMenu.prototype = {
     init: function (options) {
-      this.render(options.renderTo, options.items, options.listeners, options.click);
+      this.render(
+        options.renderTo,
+        options.items,
+        options.listeners,
+        options.click
+      );
     },
-    clearSelection: function (){
-      var changed = document.querySelector(".custom-select__trigger span")
-      changed.innerHTML = "Choose"
+    clearSelection: function () {
+      var changed = document.querySelector(".custom-select__trigger span");
+      changed.innerHTML = "Choose";
     },
-    chooseOption: function(option){
-      document.querySelector(".custom-select").querySelector(
-        ".custom-select__trigger span"
-      ).innerHTML = option.text;
+    chooseOption: function (option) {
+      var items = this.options;
+      for (let i = 0; i < this.options.items.length; i++) {
+        if (this.options.items[i].value === option.value) {
+          document
+            .querySelector(".custom-select")
+            .querySelector(".custom-select__trigger span").innerHTML =
+            option.text;
+        }
+      }
     },
     render: function (div, items, listener) {
       var currentDiv = document.getElementById(`${div}`);
-      var buttonsDiv = document.getElementById('buttons')
+      var buttonsDiv = document.getElementById("buttons");
       var optionsHtml = ``;
 
       items.forEach((element) => {
-          optionsHtml += `<div class="option-row">
+        optionsHtml += `<div class="option-row">
           <div class="left">
           <a class="${element.icon_font}"></a>
           </div>
@@ -35,11 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       buttonsDiv.innerHTML = `<button id="clear">Clear Selection</button>
-      <button id="select">Select Option 1</button>`
+      <button id="select">Select Option 1</button>`;
 
       document.body.appendChild(buttonsDiv);
-
-     
 
       currentDiv.innerHTML += `<div class="custom-select">
       <div class="custom-select__trigger"><span>Option0</span>
@@ -52,13 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       document.body.appendChild(currentDiv);
 
-      var clickOptions = currentDiv.querySelectorAll(".option-row")
-      for(var i = 0; i < clickOptions.length - 1; i++){
+      var clickOptions = currentDiv.querySelectorAll(".option-row");
+      for (var i = 0; i < clickOptions.length - 1; i++) {
         clickOptions[i].addEventListener("click", items[i].click);
       }
-
-
-
 
       document.getElementById(div).addEventListener("click", function () {
         this.querySelector(".custom-select").classList.toggle("open");
@@ -79,10 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     },
-    
   };
-
-
 
   const dropDown = new myCustomDropDownMenu({
     renderTo: "myDropDownContainer",
@@ -94,8 +97,8 @@ document.addEventListener("DOMContentLoaded", () => {
         icon: "images/disagree.png",
         icon_font: "icon-translate-1",
         click: () => {
-          console.log('option 0 click handler');
-        }
+          console.log("option 0 click handler");
+        },
       },
       {
         text: "Option1",
@@ -103,8 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
         icon: "images/network.png",
         icon_font: "icon-network",
         click: () => {
-          console.log('option 1 click handler');
-        }
+          console.log("option 1 click handler");
+        },
       },
       {
         text: "Option2",
@@ -112,29 +115,24 @@ document.addEventListener("DOMContentLoaded", () => {
         icon: "images/translate.png",
         icon_font: "icon-translate-1",
         click: () => {
-          console.log('option 2 click handler');
-        }
+          console.log("option 2 click handler");
+        },
       },
     ],
     listeners: {
       selectionChange: (selectedValue) => {
-          alert(`selected value is ${selectedValue.innerHTML}`);
-      }
+        alert(`selected value is ${selectedValue.innerHTML}`);
+      },
     },
   });
 
-  var clearButton = document.getElementById("clear")
-clearButton.addEventListener("click", function() {
-  dropDown.clearSelection()
-})
+  var clearButton = document.getElementById("clear");
+  clearButton.addEventListener("click", function () {
+    dropDown.clearSelection();
+  });
 
-var selectButton = document.getElementById("select")
-selectButton.addEventListener("click", function(){
-  dropDown.chooseOption(dropDown.options.items[0])
-})
-
+  var selectButton = document.getElementById("select");
+  selectButton.addEventListener("click", function () {
+    dropDown.chooseOption(dropDown.options.items[0]);
+  });
 });
-
-
-
-
