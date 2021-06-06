@@ -17,14 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
       var changed = document.querySelector(".custom-select__trigger span");
       changed.innerHTML = "Choose";
     },
-    chooseOption: function (option) {
-      var items = this.options;
+    chooseOption: function (value) {
+      var div = document.getElementById(this.options.renderTo)
       for (let i = 0; i < this.options.items.length; i++) {
-        if (this.options.items[i].value === option.value) {
-          document
+        if (this.options.items[i].value === value) {
+         div
             .querySelector(".custom-select")
             .querySelector(".custom-select__trigger span").innerHTML =
-            option.text;
+            this.options.items[i].text;
         }
       }
     },
@@ -133,6 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   var selectButton = document.getElementById("select");
   selectButton.addEventListener("click", function () {
-    dropDown.chooseOption(dropDown.options.items[0]);
+    dropDown.chooseOption(dropDown.options.items[0].value);
   });
 });
