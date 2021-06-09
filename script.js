@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
     this.init(options);
   };
 
+  var selectedV = ""
+
   myCustomDropDownMenu.prototype = {
     init: function (options) {
       this.render(
@@ -16,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearSelection: function () {
       var changed = document.querySelector(".custom-select__trigger span");
       changed.innerHTML = "Choose";
+      this.selectedV = ""
     },
     chooseOption: function (value) {
       var div = document.getElementById(this.options.renderTo)
@@ -24,9 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
          div
             .querySelector(".custom-select")
             .querySelector(".custom-select__trigger span").innerHTML =
-            this.options.items[i].text;
+            value;
+            this.selectedV = value
         }
       }
+    },
+    getSelectedValue: function (){
+      return this.selectedV
     },
     render: function (div, items, listener) {
       var currentDiv = document.getElementById(`${div}`);
@@ -87,52 +94,5 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   };
 
-  const dropDown = new myCustomDropDownMenu({
-    renderTo: "myDropDownContainer",
-    emptyText: "Select some option",
-    items: [
-      {
-        text: "Option0",
-        value: "option0",
-        icon: "images/disagree.png",
-        icon_font: "icon-translate-1",
-        click: () => {
-          console.log("option 0 click handler");
-        },
-      },
-      {
-        text: "Option1",
-        value: "option1",
-        icon: "images/network.png",
-        icon_font: "icon-network",
-        click: () => {
-          console.log("option 1 click handler");
-        },
-      },
-      {
-        text: "Option2",
-        value: "option2",
-        icon: "images/translate.png",
-        icon_font: "icon-translate-1",
-        click: () => {
-          console.log("option 2 click handler");
-        },
-      },
-    ],
-    listeners: {
-      selectionChange: (selectedValue) => {
-        alert(`selected value is ${selectedValue.innerHTML}`);
-      },
-    },
-  });
 
-  var clearButton = document.getElementById("clear");
-  clearButton.addEventListener("click", function () {
-    dropDown.clearSelection();
-  });
-
-  var selectButton = document.getElementById("select");
-  selectButton.addEventListener("click", function () {
-    dropDown.chooseOption(dropDown.options.items[0].value);
-  });
 });
