@@ -2,9 +2,9 @@
  myCustomDropDownMenu = function (options) {
     this.options = options;
     this.init(options);
+    this.selectedV = "";
   };
 
-  var selectedV = ""
 
   myCustomDropDownMenu.prototype = {
     init: function (options) {
@@ -27,13 +27,13 @@
          div
             .querySelector(".custom-select")
             .querySelector(".custom-select__trigger span").innerHTML =
-            value;
-            this.selectedV = value
+            this.options.items[i].text;
+            selectedV = value
         }
       }
     },
     getSelectedValue: function (){
-      return this.selectedV
+      return selectedV
     },
     render: function (div, items, listener) {
       var currentDiv = document.getElementById(`${div}`);

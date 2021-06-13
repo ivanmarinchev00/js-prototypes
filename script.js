@@ -33,9 +33,9 @@ const dropDown = new myCustomDropDownMenu({
     ],
     listeners: {
       selectionChange: (selectedValue) => {
-        this.selectedV = selectedValue.innerHTML
+        selectedV = selectedValue.innerHTML
         alert(`selected value is ${selectedValue.innerHTML}`);
-        console.log(this.selectedV)
+        console.log(selectedV + "SELECTED V")
       },
     },
   });
